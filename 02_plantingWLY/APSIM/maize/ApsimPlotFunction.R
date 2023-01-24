@@ -17,17 +17,13 @@ apsim.plots<- function(stn, results, b){
   results[[i]]$Location<-stn$Location[[i]]
  }
 
-foreach (i = 1:length(results))%do%{ 
-if(lengths(results[i])< 5){
-  results[[i]] <- NULL
-  }
- }
+  tryCatch(foreach (i = 1:length(results))%do%{ 
+    if(length(results[[i]])< 5){
+      results[[i]] <- NULL
+    }
+  }, error=function(err) NULL)
+ 
 
-foreach (i = 1:length(results))%do%{ 
-  if(lengths(results[i])< 5){
-    results[[i]] <- NULL
-  }
-}
 ##############################Graphs#####################################
   foreach (i = 1:length(results))%do%{
     print(results[[i]]  %>%
