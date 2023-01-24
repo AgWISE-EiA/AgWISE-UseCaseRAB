@@ -16,19 +16,6 @@
 #' @examples
 apsim.plots<- function(stn, results, b, wkdir){
   setwd(wkdir)
-
-  foreach (i = 1:length(results))%do%{
-    results[[i]]$Longitude<-stn$Longitude[[i]]
-    results[[i]]$Latitude<-stn$Latitude[[i]]
-    results[[i]]$Location<-stn$Location[[i]]
-  }
-  
-  tryCatch(foreach (i = 1:length(results))%do%{ 
-    if(length(results[[i]])< 5){
-      results[[i]] <- NULL
-    }
-  }, error=function(err) NULL)
-  
 ##############################Graphs######################################
   foreach (i = 1:length(results))%do%{
     print(results[[i]]  %>%
@@ -65,7 +52,7 @@ apsim.plots<- function(stn, results, b, wkdir){
           geom_point(data=pd, aes(x=Longitude, y=Latitude, color= Yield), size = 2))
   
   print(ggplot() +  geom_point(data=pd, aes(x=Longitude, y=Latitude, color= Yield), size = 2))
-return(p_Win)
+return(final)
 }
 
 

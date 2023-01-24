@@ -42,7 +42,7 @@ apsimSpatialFactorial <- function(my_list_clm, wkdir, crop, clck, variety, rep1,
   
   #Change depending on where you crop.apsimx file is stored, this script used the examples#
   setwd(wkdir)
-  ex.dir <- "D:/rwanda"
+  ex.dir <- "D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/factorial/"
   #ex.dir <- system.file("extdata", package = "apsimx")
   extd.dir <-wkdir
   file.copy(paste0(ex.dir, "/", crop),  extd.dir, overwrite = TRUE)
@@ -131,6 +131,18 @@ apsimSpatialFactorial <- function(my_list_clm, wkdir, crop, clck, variety, rep1,
     tryCatch(apsimx::apsimx(crop, value = "HarvestReport"), error=function(err) NA)
     #apsim.spatial("D:/project", 3, "KE", c("2020-01-01","2022-01-01"), "soybean.apsimx", c("2010-11-01T00:00:00", "2020-12-31T00:00:00"),"1-nov", "30-nov", "Davis")
   }
+  
+  foreach (i = 1:length(my_list_sim))%do%{
+    my_list_sim[[i]]$Longitude<-stn$Longitude[[i]]
+    my_list_sim[[i]]$Latitude<-stn$Latitude[[i]]
+    my_list_sim[[i]]$Location<-stn$Location[[i]]
+  }
+  
+  tryCatch(foreach (i = 1:length(my_list_sim))%do%{ 
+    if(length(my_list_sim[[i]])< 5){
+      my_list_sim[[i]] <- NULL
+    }
+  }, error=function(err) NULL)
   return(my_list_sim)
 }
 
