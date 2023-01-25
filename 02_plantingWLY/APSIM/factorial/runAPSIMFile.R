@@ -47,8 +47,8 @@ resultsAugSep<- apsimSpatialFactorial(my_list_clm = my_list_clm,
                         rep1 ="[Maize].Grain.Total.Wt*10 as Yield" ,
                         rep2 ="[Maize].SowingDate")
 
-saveRDS(resultsFebMar, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season1_output/resultsFebMar.RData")
-saveRDS(resultsAugSep, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season2_output/resultsAugSep.RData")
+save(resultsFebMar, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season1_output/resultsFebMar.RData")
+save(resultsAugSep, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season2_output/resultsAugSep.RData")
 
 #########################################################
 ## sourcing function to create plot
@@ -67,5 +67,5 @@ PlantingDatesAugSep<-apsim.plots(stn = stn,
                                  wkdir= "D:/project")
 
 #You can also choose to save all the files together as opposed to a list
-saveRDS(PlantingDatesFebMar, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season1_output/PlantingDatesFebMar.RData")
-saveRDS(PlantingDatesAugSep, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season2_output/PlantingDatesAugSep.RData")
+save(PlantingDatesFebMar, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season1_output/PlantingDatesFebMar.RData")
+save(PlantingDatesAugSep, file="D:/dev_agwise/AgWISE-UseCaseRAB/02_plantingWLY/APSIM/season2_output/PlantingDatesAugSep.RData")
