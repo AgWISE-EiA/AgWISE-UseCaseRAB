@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "ExplorerWidth": 285,
+  "ExplorerWidth": 300,
   "Version": 159,
   "Name": "Simulations",
   "ResourceName": null,
@@ -121,7 +121,9 @@
                     "[Maize].Grain.Size",
                     "[Maize].Grain.NumberFunction",
                     "[Maize].Grain.N",
-                    "[Maize].Total.Wt"
+                    "[Maize].Total.Wt",
+                    "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Harvesting as InCropRainfall",
+                    "Mean of [Weather].MeanT from [Maize].Sowing to [Maize].Harvesting as InCropTemperature"
                   ],
                   "EventNames": [
                     "[Maize].Harvesting"

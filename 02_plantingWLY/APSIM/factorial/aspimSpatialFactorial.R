@@ -50,20 +50,11 @@ apsimSpatialFactorial <- function(my_list_clm, wkdir, crop, clck, variety, rep1,
   list.files(ex.dir)
   list.files(extd.dir)
   
-#Get soil data from iscric
-  my_list_sol <- foreach (i = 1:nrow(stn)-1) %dopar% {
-    tryCatch(apsimx::get_isric_soil_profile(lonlat = c(stn$Longitude[i], stn$Latitude[[i]]))
-             , error=function(err) NA)
-  }
-  
 #saveRDS(my_list_sol, file="soil.RData")
   
 #my_list_soil<- readRDS("soil.RData")
   #APSIM PART##
-  #Write the weather files to a working directory and Edit the weather as per location
-  foreach (i =1:length(my_list_clm)) %dopar% {
-    apsimx::write_apsim_met(my_list_clm[[i]], wrt.dir = extd.dir, filename = paste0('wth_loc_',i,'.met'))}
-  
+
   foreach (i =1:length(my_list_clm)) %dopar% {
     dir.create(paste0(extd.dir, '/', i))
     apsimx::edit_apsimx(paste0(crop), 
@@ -84,7 +75,6 @@ apsimSpatialFactorial <- function(my_list_clm, wkdir, crop, clck, variety, rep1,
              error=function(e) {NA})
   }
   
-
   #Edit clock#
   foreach (i =1:length(my_list_clm)) %dopar% {  
     setwd(paste0(extd.dir, '/', i))
@@ -124,26 +114,6 @@ apsimSpatialFactorial <- function(my_list_clm, wkdir, crop, clck, variety, rep1,
                         value = rep2, 
                         verbose = TRUE, overwrite = TRUE)
   }
-  
-  # Run the simulation for the entire study area  
-  my_list_sim<- foreach (i=1:length(my_list_clm)) %dopar% {  
-    setwd(paste0(extd.dir, '/', i))  
-    tryCatch(apsimx::apsimx(crop, value = "HarvestReport"), error=function(err) NA)
-    #apsim.spatial("D:/project", 3, "KE", c("2020-01-01","2022-01-01"), "soybean.apsimx", c("2010-11-01T00:00:00", "2020-12-31T00:00:00"),"1-nov", "30-nov", "Davis")
-  }
-  
-  foreach (i = 1:length(my_list_sim))%do%{
-    my_list_sim[[i]]$Longitude<-stn$Longitude[[i]]
-    my_list_sim[[i]]$Latitude<-stn$Latitude[[i]]
-    my_list_sim[[i]]$Location<-stn$Location[[i]]
-  }
-  
-  tryCatch(foreach (i = 1:length(my_list_sim))%do%{ 
-    if(length(my_list_sim[[i]])< 5){
-      my_list_sim[[i]] <- NULL
-    }
-  }, error=function(err) NULL)
-  return(my_list_sim)
-}
+ }
 
 

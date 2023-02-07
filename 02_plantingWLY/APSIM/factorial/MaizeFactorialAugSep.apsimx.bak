@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "ExplorerWidth": 285,
+  "ExplorerWidth": 300,
   "Version": 159,
   "Name": "Simulations",
   "ResourceName": null,
@@ -42,7 +42,7 @@
               "Children": [
                 {
                   "$type": "Models.Factorial.Factor, Models",
-                  "Specification": "[SowingRule].Script.SowDate =01-aug, 15-aug, 22-aug, 29-aug, 30-aug, 31-aug, 05-sep, 12-sep, 19-sep, 26-sep",
+                  "Specification": "[SowingRule].Script.SowDate =01-aug, 08-aug, 15-aug, 22-aug, 29-aug, 05-sep, 12-sep, 19-sep, 26-sep",
                   "Name": "SowDate",
                   "ResourceName": null,
                   "Children": [],
@@ -85,8 +85,8 @@
             {
               "$type": "Models.Climate.Weather, Models",
               "ConstantsFile": null,
-              "FileName": "%root%\\Examples\\WeatherFiles\\Dalby.met",
-              "ExcelWorkSheetName": null,
+              "FileName": "D:\\project\\wth_loc_684.met",
+              "ExcelWorkSheetName": "",
               "Name": "Weather",
               "ResourceName": null,
               "Children": [],
@@ -121,7 +121,11 @@
                     "[Maize].Grain.Size",
                     "[Maize].Grain.NumberFunction",
                     "[Maize].Grain.N",
-                    "[Maize].Total.Wt"
+                    "[Maize].Total.Wt",
+                    "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Harvesting as InCropRainfall",
+                    "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Flowering as InCropSFRainfall",
+                    "Sum of [Weather].Rain from [Maize].Flowering to [Maize].Harvesting as InCropFMRainfall",
+                    "Mean of [Weather].MeanT from [Maize].Sowing to [Maize].Harvesting as InCropTemperature"
                   ],
                   "EventNames": [
                     "[Maize].Harvesting"
