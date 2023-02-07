@@ -42,7 +42,7 @@
               "Children": [
                 {
                   "$type": "Models.Factorial.Factor, Models",
-                  "Specification": "[SowingRule].Script.SowDate =01-aug, 15-aug, 22-aug, 29-aug, 30-aug, 31-aug, 05-sep, 12-sep, 19-sep, 26-sep",
+                  "Specification": "[SowingRule].Script.SowDate =01-aug, 08-aug, 15-aug, 22-aug, 29-aug, 05-sep, 12-sep, 19-sep, 26-sep",
                   "Name": "SowDate",
                   "ResourceName": null,
                   "Children": [],
@@ -66,7 +66,7 @@
             {
               "$type": "Models.Clock, Models",
               "Start": "1999-01-01T00:00:00",
-              "End": "2000-01-01T00:00:00",
+              "End": "2005-01-01T00:00:00",
               "Name": "Clock",
               "ResourceName": null,
               "Children": [],
@@ -85,8 +85,8 @@
             {
               "$type": "Models.Climate.Weather, Models",
               "ConstantsFile": null,
-              "FileName": "%root%\\Examples\\WeatherFiles\\Dalby.met",
-              "ExcelWorkSheetName": null,
+              "FileName": "D:\\project\\wth_loc_684.met",
+              "ExcelWorkSheetName": "",
               "Name": "Weather",
               "ResourceName": null,
               "Children": [],
@@ -121,7 +121,12 @@
                     "[Maize].Grain.Size",
                     "[Maize].Grain.NumberFunction",
                     "[Maize].Grain.N",
-                    "[Maize].Total.Wt"
+                    "[Maize].Total.Wt",
+                    "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Harvesting as InCropRainfall",
+                    "Mean of [Weather].MaxT from [Maize].Sowing to [Maize].Harvesting as InCropMaxTemperature",
+                    "Sum of [Soil].SoilWater.Eo from [Maize].Sowing to [Maize].Harvesting as InCropET",
+                    "Sum of [Soil].SoilWater.Es from [Maize].Sowing to [Maize].Harvesting as InCropES",
+                    "([Maize].Grain.Wt * 10) / InCropET as WUE2 "
                   ],
                   "EventNames": [
                     "[Maize].Harvesting"
@@ -720,12 +725,12 @@
                   "Code": "using APSIM.Shared.Utilities;\r\nusing Models.Utilities;\r\nusing Models.Soils;\r\nusing Models.PMF;\r\nusing Models.Core;\r\nusing System;\r\n\r\nnamespace Models\r\n{\r\n    [Serializable]\r\n    public class Script : Model\r\n    {\r\n        [Link] Clock Clock;\r\n        [Link] Fertiliser Fertiliser;\r\n        [Link] Summary Summary;\r\n        [Link] Soil Soil;\r\n        \r\n        [Description(\"Crop\")]\r\n        public IPlant Crop { get; set; }\r\n\r\n        [Description(\"Sowing date (d-mmm)\")]\r\n        public string SowDate { get; set; }\r\n\r\n        [Display(Type = DisplayType.CultivarName)]\r\n        [Description(\"Cultivar to be sown\")]\r\n        public string CultivarName { get; set; }\r\n\r\n        [Description(\"Sowing depth (mm)\")]\r\n        public double SowingDepth { get; set; }\r\n\r\n        [Description(\"Row spacing (mm)\")]\r\n        public double RowSpacing { get; set; }\r\n\r\n        [Description(\"Plant population (/m2)\")]\r\n        public double Population { get; set; }\r\n\r\n        [EventSubscribe(\"DoManagement\")]\r\n        private void OnDoManagement(object sender, EventArgs e)\r\n        {\r\n            if (DateUtilities.WithinDates(SowDate, Clock.Today, SowDate))\r\n            {\r\n                Crop.Sow(population: Population, cultivar: CultivarName, depth: SowingDepth, rowSpacing: RowSpacing);    \r\n            }\r\n        }\r\n    }\r\n}\r\n",
                   "Parameters": [
                     {
-                      "Key": "Crop",
-                      "Value": "[Maize]"
-                    },
-                    {
                       "Key": "SowDate",
                       "Value": "24-Jul"
+                    },
+                    {
+                      "Key": "Crop",
+                      "Value": "[Maize]"
                     },
                     {
                       "Key": "CultivarName",
