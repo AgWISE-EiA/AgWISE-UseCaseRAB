@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "ExplorerWidth": 285,
+  "ExplorerWidth": 300,
   "Version": 159,
   "Name": "Simulations",
   "ResourceName": null,
@@ -123,10 +123,16 @@
                     "[Maize].Grain.N",
                     "[Maize].Total.Wt",
                     "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Harvesting as InCropRainfall",
+<<<<<<< HEAD
                     "Mean of [Weather].MaxT from [Maize].Sowing to [Maize].Harvesting as InCropMaxTemperature",
                     "Sum of [Soil].SoilWater.Eo from [Maize].Sowing to [Maize].Harvesting as InCropET",
                     "Sum of [Soil].SoilWater.Es from [Maize].Sowing to [Maize].Harvesting as InCropES",
                     "([Maize].Grain.Wt * 10) / InCropET as WUE2 "
+=======
+                    "Sum of [Weather].Rain from [Maize].Sowing to [Maize].Flowering as InCropSFRainfall",
+                    "Sum of [Weather].Rain from [Maize].Flowering to [Maize].Harvesting as InCropFMRainfall",
+                    "Mean of [Weather].MeanT from [Maize].Sowing to [Maize].Harvesting as InCropTemperature"
+>>>>>>> 44f3fe9818eab7394f76d0c2a85e46f0d56e0919
                   ],
                   "EventNames": [
                     "[Maize].Harvesting"
